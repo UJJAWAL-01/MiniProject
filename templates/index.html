@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Scheduling</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Case Scheduling</h1>
+    <div class="container">
+        <form action="/" method="post">
+            <label for="case_type">Case Type:</label>
+            <select name="case_type">
+                <option value="Civil">Civil</option>
+                <option value="Criminal">Criminal</option>
+                <option value="Family">Family</option>
+            </select>
+
+            <label for="last_hearing_date">Last Hearing Date:</label>
+            <input type="date" name="last_hearing_date">
+
+            <button type="submit">Schedule Case</button>
+        </form>
+    </div>
+
+    {% if schedule %}
+    <div class="container">
+        <h2>Scheduled Cases</h2>
+        <ul>
+            {% for case in schedule %}
+                <li>{{ case.case_type }} - {{ case.scheduled_date }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if previous_cases %}
+    <div class="container">
+        <h2>Previous Inputs</h2>
+        <ul>
+            {% for case in previous_cases %}
+                <li>{{ case.case_type }} - {{ case.last_hearing_date }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>
